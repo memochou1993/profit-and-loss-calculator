@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profit and Loss Calculator</title>
+</head>
+<body>
+    <form>
+        買入個股成交價：<input type="text" id="a"> 股數：<input type="text" value="1000" id="aa"><br>
+        賣出個股成交價：<input type="text" id="b"> 股數：<input type="text" value="1000" id="bb"><br>
+    </form>
+
+    <hr>
+
+    <table id="table" style="width: 100%"></table>
+
+    <script>
+        handleKeyup = () => {
+            const a = document.getElementById('a').value;
+            const b = document.getElementById('b').value;
+
+            const aa = document.getElementById('aa').value;
+            const bb = document.getElementById('bb').value;
+            
+            if (!a || !b || !aa || !bb) {
+                return;
+            }
+
+            x = 0.1425 * 0.01
+            y = 0.3 * 0.01
+
+            let content = '';
+
+            for (let i = -10; i < 10; i++) {
+                const c = ((Number(b) + i) * bb - (Number(b) + i) * bb * (x + y)) - (a * aa + a * aa * x)
+                const d = c / (a * aa) * 100
+
+                let color = ''
+
+                if (i === 0) {
+                    color = 'gold';
+                }
+
+                if (i === Number(a) - Number(b)) {
+                    color = 'skyblue';
+                }
+
+                content += `
+                    <tr style="background: ${color}">
+                        <td>
+                            ${(Number(b) + i)}
+                        </td>
+                        <td style="color: ${c > 0 ? 'red' : 'green'}">
+                            ${c.toFixed(2)}
+                        </td>
+                        <td>
+                            ${d.toFixed(2)}%
+                        </td>
+                    </tr>
+                `;
+            }
+
+            const table = `
+                <thead>
+                    <tr>
+                        <th>
+                            賣出
+                        </th>
+                        <th>
+                            獲利
+                        </th>
+                        <th>
+                            獲利率
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="content">
+                    ${content}
+                </tbody>
+            `;
+
+            document.getElementById('table').innerHTML = table;
+        };
+
+        document.addEventListener('keyup', handleKeyup);
+    </script>
+</body>
+</html>
