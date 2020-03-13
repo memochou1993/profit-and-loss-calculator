@@ -12,59 +12,55 @@
         賣出個股成交價：<input type="text" id="b"> 股數：<input type="text" value="1000" id="bb"><br>
     </form>
 
+    <br>
     <hr>
 
-    <table id="table" style="width: 100%"></table>
+    <table id="table" style="width: 100%;"></table>
 
     <script>
         handleKeyup = () => {
-            const a = document.getElementById('a').value;
-            const b = document.getElementById('b').value;
-
+            const a = Number(document.getElementById('a').value).toFixed(2);
+            const b = Number(document.getElementById('b').value).toFixed(2);
             const aa = document.getElementById('aa').value;
             const bb = document.getElementById('bb').value;
-            
+
             if (!a || !b || !aa || !bb) {
                 return;
             }
 
-            x = 0.1425 * 0.01
-            y = 0.3 * 0.01
+            const x = 0.1425 * 0.01;
+            const y = 0.3 * 0.01;
+            const z = 20;
 
-            let content = '';
+            const content = Array(z + 1)
+                .fill('')
+                .map((v, i) => {
+                    return i - z / 2;
+                })
+                .map((r, i) => {
+                    const c = ((Number(b) + r) * bb - (Number(b) + r) * bb * (x + y)) - (a * aa + a * aa * x);
+                    const d = c / (a * aa) * 100;
+                    const e = r === 0 ? 'gold' : r === Number(a) - Number(b) ? 'skyblue' : '';
 
-            for (let i = -10; i < 10; i++) {
-                const c = ((Number(b) + i) * bb - (Number(b) + i) * bb * (x + y)) - (a * aa + a * aa * x)
-                const d = c / (a * aa) * 100
-
-                let color = ''
-
-                if (i === 0) {
-                    color = 'gold';
-                }
-
-                if (i === Number(a) - Number(b)) {
-                    color = 'skyblue';
-                }
-
-                content += `
-                    <tr style="background: ${color}">
-                        <td>
-                            ${(Number(b) + i)}
-                        </td>
-                        <td style="color: ${c > 0 ? 'red' : 'green'}">
-                            ${c.toFixed(2)}
-                        </td>
-                        <td>
-                            ${d.toFixed(2)}%
-                        </td>
-                    </tr>
-                `;
-            }
+                    return `
+                        <tr style="background: ${e};">
+                            <td style="text-align: center;">
+                                ${(Number(b) + r)}
+                            </td>
+                            <td style="text-align: center; color: ${c > 0 ? 'red' : 'green'};">
+                                ${c.toFixed(2)}
+                            </td>
+                            <td style="text-align: center;">
+                                ${d.toFixed(2)}%
+                            </td>
+                        </tr>
+                    `;
+                })
+                .join('');
 
             const table = `
                 <thead>
-                    <tr>
+                    <tr style="height: 50px;">
                         <th>
                             賣出
                         </th>
