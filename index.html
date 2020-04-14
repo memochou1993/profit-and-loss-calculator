@@ -8,8 +8,10 @@
 </head>
 <body>
     <form>
-        買入個股成交價：<input type="text" id="a"> 股數：<input type="text" value="1000" id="aa"><br>
-        賣出個股成交價：<input type="text" id="b"> 股數：<input type="text" value="1000" id="bb"><br>
+        買入個股成交價：<input type="number" autocomplete="off" step="0.1" id="a">
+        股數：<input type="number" autocomplete="off" value="1000" step="1000" id="aa"><br>
+        賣出個股成交價：<input type="number" autocomplete="off" step="0.1" id="b">
+        股數：<input type="number" autocomplete="off" value="1000" step="1000" id="bb"><br>
     </form>
 
     <br>
@@ -18,11 +20,11 @@
     <table id="table" style="width: 100%;"></table>
 
     <script>
-        handleKeyup = () => {
-            const a = Number(document.getElementById('a').value).toFixed(2);
-            const b = Number(document.getElementById('b').value).toFixed(2);
-            const aa = document.getElementById('aa').value;
-            const bb = document.getElementById('bb').value;
+        handleInput = () => {
+            const a = Number(document.getElementById('a').value);
+            const b = Number(document.getElementById('b').value);
+            const aa = Number(document.getElementById('aa').value);
+            const bb = Number(document.getElementById('bb').value);
 
             if (!a || !b || !aa || !bb) {
                 return;
@@ -38,19 +40,19 @@
                     return i - z / 2;
                 })
                 .map((r, i) => {
-                    const c = ((Number(b) + r) * bb - (Number(b) + r) * bb * (x + y)) - (a * aa + a * aa * x);
+                    const c = ((b + r) * bb - (b + r) * bb * (x + y)) - (a * aa + a * aa * x);
                     const d = c / (a * aa) * 100;
-                    const e = r === 0 ? 'gold' : r === Number(a) - Number(b) ? 'skyblue' : '';
+                    const e = r === 0 ? 'gold' : r === a - b ? 'paleturquoise' : '';
 
                     return `
                         <tr style="background: ${e};">
                             <td style="text-align: center;">
-                                ${(Number(b) + r)}
+                                ${(b + r).toFixed(2)}
                             </td>
                             <td style="text-align: center; color: ${c > 0 ? 'red' : 'green'};">
                                 ${c.toFixed(2)}
                             </td>
-                            <td style="text-align: center;">
+                            <td style="text-align: center; color: ${c > 0 ? 'red' : 'green'};">
                                 ${d.toFixed(2)}%
                             </td>
                         </tr>
@@ -80,7 +82,7 @@
             document.getElementById('table').innerHTML = table;
         };
 
-        document.addEventListener('keyup', handleKeyup);
+        document.addEventListener('input', handleInput);
     </script>
 </body>
 </html>
