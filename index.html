@@ -5,34 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Profit and Loss Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
-    <form>
-        買入個股成交價：<input type="number" autocomplete="off" step="0.1" id="a">
-        股數：<input type="number" autocomplete="off" value="1000" step="1000" id="aa"><br>
-        賣出個股成交價：<input type="number" autocomplete="off" step="0.1" id="b">
-        股數：<input type="number" autocomplete="off" value="1000" step="1000" id="bb"><br>
-    </form>
-
-    <br>
+    <h3 class="text-center my-3">損益計算器</h3>
+    
     <hr>
 
-    <table id="table" style="width: 100%;"></table>
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="a">成本價</label>
+                        <input type="number" class="form-control" autocomplete="off" step="0.1" id="a">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="b">目標價</label>
+                        <input type="number" class="form-control" autocomplete="off" step="0.1" id="b">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="n">交易股數</label>
+                        <input type="number" class="form-control" autocomplete="off" value="1000" step="1000" id="n">
+                    </div>
+                </div>
+            </div>
+        </form>
 
+        <table class="table table-sm table-bordered table-hover" id="table"></table>
+    </div>
     <script>
         handleInput = () => {
             const a = Number(document.getElementById('a').value);
             const b = Number(document.getElementById('b').value);
-            const aa = Number(document.getElementById('aa').value);
-            const bb = Number(document.getElementById('bb').value);
+            const n = Number(document.getElementById('n').value);
 
-            if (!a || !b || !aa || !bb) {
+            if (!a || !b || !n) {
                 return;
             }
 
             const x = 0.1425 * 0.01;
             const y = 0.3 * 0.01;
-            const z = 20;
+            const z = 10;
 
             const content = Array(z + 1)
                 .fill('')
@@ -40,20 +58,20 @@
                     return i - z / 2;
                 })
                 .map((r, i) => {
-                    const c = ((b + r) * bb - (b + r) * bb * (x + y)) - (a * aa + a * aa * x);
-                    const d = c / (a * aa) * 100;
+                    const c = (b + r) * n * (1 - x - y) - (a * n * (1 + x));
+                    const d = c / (a * n) * 100;
                     const e = r === 0 ? 'gold' : r === a - b ? 'paleturquoise' : '';
 
                     return `
-                        <tr style="background: ${e};">
-                            <td style="text-align: center;">
+                        <tr class="text-center" style="background: ${e};">
+                            <td>
                                 ${(b + r).toFixed(2)}
                             </td>
-                            <td style="text-align: center; color: ${c > 0 ? 'red' : 'green'};">
-                                ${c.toFixed(2)}
+                            <td style="color: ${c > 0 ? 'red' : 'green'};">
+                                ${Number(c.toFixed(2)).toLocaleString()}
                             </td>
-                            <td style="text-align: center; color: ${c > 0 ? 'red' : 'green'};">
-                                ${d.toFixed(2)}%
+                            <td style="color: ${c > 0 ? 'red' : 'green'};">
+                                ${Number(d.toFixed(2)).toLocaleString()}%
                             </td>
                         </tr>
                     `;
@@ -62,15 +80,15 @@
 
             const table = `
                 <thead>
-                    <tr style="height: 50px;">
+                    <tr class="text-center">
                         <th>
-                            賣出
+                            成交價
                         </th>
                         <th>
-                            獲利
+                            損益金額
                         </th>
                         <th>
-                            獲利率
+                            報酬率
                         </th>
                     </tr>
                 </thead>
