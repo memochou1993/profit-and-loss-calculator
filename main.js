@@ -7,17 +7,39 @@ const content = document.getElementById('content');
 /**
  * 手續費
  */
-const x = 0.1425 * 0.01;
+const h = 0.1425 * 0.01;
 
 /**
  * 交易稅
  */
-const y = 0.3 * 0.01;
+const t = 0.3 * 0.01;
 
 /**
  * 區間
  */
-const z = 20;
+const range = 20;
+
+/**
+ * 換算檔位
+ */
+const f = (price) => {
+    switch (true) {
+        case price < 10:
+            return 0.01;
+        case price >= 10 && price < 50:
+            return 0.05;
+        case price >= 50 && price < 100:
+            return 0.1;
+        case price >= 100 && price < 500:
+            return 0.5;
+        case price >= 500 && price < 1000:
+            return 1;
+        case price >= 1000:
+            return 5;
+        default:
+            break;
+    }
+}
 
 /**
  * 處理輸入事件
@@ -41,54 +63,12 @@ const handleInput = () => {
     /**
      * 修正成本價檔位
      */
-    switch (true) {
-        case av < 10:
-            a.step = 0.01;
-            break;
-        case av >= 10 && av < 50:
-            a.step = 0.05;
-            break;
-        case av >= 50 && av < 100:
-            a.step = 0.1;
-            break;
-        case av >= 100 && av < 500:
-            a.step = 0.5;
-            break;
-        case av >= 500 && av < 1000:
-            a.step = 1;
-            break;
-        case av > 1000:
-            a.step = 5;
-            break;
-        default:
-            break;
-    }
+    a.step = f(av);
 
     /**
      * 修正目標價檔位
      */
-    switch (true) {
-        case bv < 10:
-            b.step = 0.01;
-            break;
-        case bv >= 10 && bv < 50:
-            b.step = 0.05;
-            break;
-        case bv >= 50 && bv < 100:
-            b.step = 0.1;
-            break;
-        case bv >= 100 && bv < 500:
-            b.step = 0.5;
-            break;
-        case bv >= 500 && bv < 1000:
-            b.step = 1;
-            break;
-        case bv > 1000:
-            b.step = 5;
-            break;
-        default:
-            break;
-    }
+    b.step = f(bv);
 
     if (!av || !bv || !nv) {
         return;
@@ -97,10 +77,10 @@ const handleInput = () => {
     /**
      * 渲染表格
      */
-    content.innerHTML = Array(z + 1)
+    content.innerHTML = Array(range + 1)
         .fill('')
         .map((v, i) => {
-            return i - z / 2;
+            return i - range / 2;
         })
         .map((r) => {
             /**
@@ -116,7 +96,7 @@ const handleInput = () => {
             /**
              * 損益金額
              */
-            const c = (bv + p) * nv * (1 - x - y) - av * nv * (1 + x);
+            const c = (bv + p) * nv * (1 - h - t) - av * nv * (1 + h);
 
             /**
              * 報酬率
