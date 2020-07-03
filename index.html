@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>損益計算器</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="icon" href="icon.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
 </head>
-<body class="text-center">
-    <h4 class="mt-3">
+<body>
+    <h4 class="text-center mt-3">
         損益計算器
     </h4>
     <hr>
@@ -37,57 +38,8 @@
             </div>
         </form>
 
-        <table class="table table-sm table-bordered table-hover mt-2" id="table"></table>
-
-        <div id="footer" hidden>
-            Powered by
-            <a href="https://github.com/memochou1993/profit-and-loss-calculator" rel="noopener noreferrer" target="_blank">
-                Memo Chou
-            </a>
-        </div>
-    </div>
-
-    <script>
-        const handleInput = () => {
-            const a = Number(document.getElementById('a').value);
-            const b = Number(document.getElementById('b').value);
-            const n = Number(document.getElementById('n').value);
-
-            if (!a || !b || !n) {
-                return;
-            }
-
-            const x = 0.1425 * 0.01;
-            const y = 0.3 * 0.01;
-            const z = 10;
-
-            const content = Array(z + 1)
-                .fill('')
-                .map((v, i) => {
-                    return i - z / 2;
-                })
-                .map((r, i) => {
-                    const c = (b + r) * n * (1 - x - y) - (a * n * (1 + x));
-                    const d = c / (a * n) * 100;
-                    const e = r === 0 ? 'gold' : r === a - b ? 'paleturquoise' : '';
-
-                    return `
-                        <tr class="text-center" style="background: ${e};">
-                            <td>
-                                ${(b + r).toFixed(2)}
-                            </td>
-                            <td style="color: ${c > 0 ? 'red' : 'green'};">
-                                ${Number(c.toFixed(2)).toLocaleString()}
-                            </td>
-                            <td style="color: ${c > 0 ? 'red' : 'green'};">
-                                ${Number(d.toFixed(2)).toLocaleString()}%
-                            </td>
-                        </tr>
-                    `;
-                })
-                .join('');
-
-            const table = `
+        <div id="body" hidden>
+            <table class="table table-sm table-bordered table-hover my-2">
                 <thead>
                     <tr class="text-center">
                         <th>
@@ -101,17 +53,19 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="content">
-                    ${content}
-                </tbody>
-            `;
+                <tbody id="content"></tbody>
+            </table>
+    
+            <div class="text-right" id="footer">
+                Powered by
+                <a href="https://github.com/memochou1993/profit-and-loss-calculator" rel="noopener noreferrer" target="_blank">
+                    Memo Chou
+                </a>
+            </div>
+        </div>
+    </div>
 
-            document.getElementById('table').innerHTML = table;
-            document.getElementById('footer').hidden = false;
-        };
-
-        document.addEventListener('input', handleInput);
-    </script>
+    <script src="main.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117292723-8"></script>
@@ -122,11 +76,5 @@
 
     gtag('config', 'UA-117292723-8');
     </script>
-
-    <style>
-        #footer {
-            font-size: 12px;
-        }
-    </style>
 </body>
 </html>
