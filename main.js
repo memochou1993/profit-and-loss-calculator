@@ -131,6 +131,16 @@ class Calculator {
   }
 
   處理報價() {
+    alert("testing...");
+
+    alert(`
+      ${this.買入價格}
+      ${this.賣出價格}
+      ${this.交易股數}
+      ${this.手續費折扣}
+      ${this.檔數}
+    `);
+    
     if (!this.完成表單) {
       return;
     }
