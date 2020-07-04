@@ -1,5 +1,3 @@
-'use strict';
-
 const 文件 = document;
 
 const 百 = 100;
@@ -24,7 +22,6 @@ const 註冊事件 = (節點, 事件, 函式) => 節點.addEventListener(事件,
 
 class Calculator {
   constructor() {
-    alert("測試中，初始");
     this.回填資料();
     this.註冊事件();
   }
@@ -93,8 +90,6 @@ class Calculator {
   }
 
   註冊事件() {
-    alert("測試中，註冊事件");
-
     註冊事件(this.買入價格欄位, 輸入, () => {
       this.修正檔位(this.買入價格欄位, this.買入價格);
     });
@@ -112,7 +107,6 @@ class Calculator {
     });
 
     註冊事件(文件, 輸入, () => {
-      alert("測試中，處理報價");
       this.處理報價();
     });
   }
@@ -182,3 +176,4 @@ class Calculator {
 }
 
 new Calculator();
+alert("測試中");
