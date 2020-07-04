@@ -1,3 +1,4 @@
+const 文件 = document;
 const 值 = "value";
 const 檔位 = "step";
 const 輸入 = "input";
@@ -5,11 +6,13 @@ const 成交價顏色 = "gold";
 const 百 = 100;
 const 千 = 1000;
 
-const 取得元素 = (名字) => document.getElementById(名字);
+const 取得元素 = (名字) => 文件.getElementById(名字);
 const 取得數值 = (字串) => Number(字串);
 const 取得整數 = (數值) => Math.floor(數值);
 const 取得屬性 = (節點, 標籤) => 節點[標籤];
-const 註冊事件 = (事件, 方法) => document.addEventListener(事件, 方法);
+const 註冊事件 = (文件, 事件, 方法) => 文件.addEventListener(事件, 方法);
+const 記住 = (名字, 內容) => localStorage.setItem(名字, 內容);
+const 想起 = (名字, 預設) => localStorage.getItem(名字) || 預設;
 const 渲染 = (元素, 內容) => (元素["innerHTML"] = 內容);
 
 const 買入價欄位 = 取得元素("買入價");
@@ -42,6 +45,8 @@ const 換算檔位 = (價格) => {
   }
 };
 
+const 回填 = (欄位, 名字, 預設) => (欄位["value"] = 想起(名字, 預設));
+const 記住欄位 = (名字, 事件) => 記住(名字, 事件.target.value);
 const 修正檔位 = (欄位, 價格) => (欄位[檔位] = 換算檔位(價格));
 const 顯示表格 = () => (表格節點.hidden = false);
 const 格式化數值 = (數值) => Number(數值.toFixed(2)).toLocaleString();
@@ -49,6 +54,10 @@ const 取得偏移量 = () => [...Array(檔數 + 1).keys()].map((v) => v - 檔�
 const 取得最低手續費 = (手續費) => (手續費 < 20 ? 20 : 手續費);
 const 取得成交價顏色 = (偏移量) => (偏移量 === 0 ? 成交價顏色 : "");
 const 取得損益金額顏色 = (損益金額) => (損益金額 > 0 ? "red" : "green");
+
+const 回填資料 = () => {
+  回填(手續費折扣欄位, "手續費折扣", 1);
+};
 
 const 處理報價 = () => {
   const 買入價 = 取得數值(取得屬性(買入價欄位, 值));
@@ -97,7 +106,12 @@ const 處理報價 = () => {
     })
     .join("");
 
-  渲染(報價節點, 報價) && 顯示表格();
+  渲染(報價節點, 報價);
+
+  顯示表格();
 };
 
-註冊事件(輸入, 處理報價);
+回填資料();
+
+註冊事件(手續費折扣欄位, 輸入, (event) => 記住欄位("手續費折扣", event));
+註冊事件(文件, 輸入, 處理報價);
