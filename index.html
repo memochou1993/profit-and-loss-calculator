@@ -10,53 +10,45 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h4 class="text-center mt-3">
-        損益計算器
-    </h4>
+    <h4 class="text-center mt-3">損益計算器</h4>
     <hr>
     <div class="container">
         <form>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="a">成本價</label>
-                        <input type="number" class="form-control" autocomplete="off" step="0.1" id="a" autofocus>
+                        <label for="買入價">買入價</label>
+                        <input type="number" class="form-control form-control-sm" autocomplete="off" step="0.1" id="買入價" autofocus>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="b">目標價</label>
-                        <input type="number" class="form-control" autocomplete="off" step="0.1" id="b">
+                        <label for="賣出價">賣出價</label>
+                        <input type="number" class="form-control form-control-sm" autocomplete="off" step="0.1" id="賣出價">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="n">交易股數</label>
-                        <input type="number" value="1000" class="form-control" autocomplete="off" step="1000" id="n">
+                        <label for="交易股數">交易股數</label>
+                        <input type="number" value="1000" class="form-control form-control-sm" autocomplete="off" step="1000" id="交易股數">
                     </div>
                 </div>
             </div>
         </form>
 
-        <div id="body" hidden>
+        <div id="表格" hidden>
             <table class="table table-sm table-bordered table-hover my-2">
                 <thead>
                     <tr class="text-center">
-                        <th>
-                            成交價
-                        </th>
-                        <th>
-                            損益金額
-                        </th>
-                        <th>
-                            報酬率
-                        </th>
+                        <th>成交價</th>
+                        <th>損益金額</th>
+                        <th>報酬率</th>
                     </tr>
                 </thead>
-                <tbody id="content"></tbody>
+                <tbody id="報價"></tbody>
             </table>
     
-            <div class="text-right my-2" id="footer">
+            <div class="text-right mb-3" id="footer">
                 Powered by
                 <a href="https://github.com/memochou1993/profit-and-loss-calculator" rel="noopener noreferrer" target="_blank">
                     Memo Chou
