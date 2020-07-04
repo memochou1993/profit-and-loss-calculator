@@ -7,9 +7,9 @@ table {
 }
 
 #gear {
-    left: 30px;
+    left: 15px;
     width: 30px;
-    bottom: 30px;
+    bottom: 15px;
     margin: 10px;
     cursor: pointer;
     position: fixed;
