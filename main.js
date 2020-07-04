@@ -65,7 +65,6 @@ class Calculator {
 
   get 完成表單() {
     return (
-      this.交易別 &&
       this.買入價格 &&
       this.賣出價格 &&
       this.交易股數 &&
