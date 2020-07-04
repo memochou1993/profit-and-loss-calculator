@@ -14,19 +14,28 @@
     <hr>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="交易別">交易別</label>
+                    <select class="form-control form-control-sm" id="交易別">
+                        <option value="現股">現股</option>
+                        <option value="現沖">現沖</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="買入價格">買入價格</label>
                     <input type="number" class="form-control form-control-sm" autocomplete="off" step="0.1" id="買入價格" autofocus>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="賣出價格">賣出價格</label>
                     <input type="number" class="form-control form-control-sm" autocomplete="off" step="0.1" id="賣出價格">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="交易股數">交易股數</label>
                     <input type="number" value="1000" class="form-control form-control-sm" autocomplete="off" step="1000" id="交易股數">
