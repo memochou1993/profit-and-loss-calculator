@@ -3,7 +3,9 @@ const 文件 = document;
 const 百 = 100;
 const 千 = 1000;
 const 值 = "value";
-const 檔位 = "step";
+const 最小 = "min";
+const 最大 = "max";
+const 間隔 = "step";
 const 輸入 = "input";
 const 獲益顏色 = "red";
 const 虧損顏色 = "green";
@@ -63,23 +65,61 @@ class Calculator {
   }
 
   get 買入價格() {
-    return this.取得欄位數值("買入價格欄位");
+    const 買入價格 = this.取得欄位數值("買入價格欄位");
+
+    if (買入價格 < 1 || 買入價格 > 取得屬性(this.買入價格欄位, 最大)) {
+      return; // alert
+    }
+
+    return 買入價格;
   }
 
   get 賣出價格() {
-    return this.取得欄位數值("賣出價格欄位");
+    const 賣出價格 = this.取得欄位數值("賣出價格欄位");
+
+    if (賣出價格 < 1 || 賣出價格 > 取得屬性(this.賣出價格欄位, 最大)) {
+      return;
+    }
+
+    return 賣出價格;
   }
 
   get 交易股數() {
-    return this.取得欄位數值("交易股數欄位");
+    const 交易股數 = this.取得欄位數值("交易股數欄位");
+
+    if (交易股數 < 1 || 交易股數 > 取得屬性(this.交易股數欄位, 最大)) {
+      return;
+    }
+
+    return 交易股數;
   }
 
   get 手續費折扣() {
-    return this.取得欄位數值("手續費折扣欄位");
+    const 手續費折扣 = this.取得欄位數值("手續費折扣欄位");
+    const 最小值 = 取得屬性(this.手續費折扣欄位, 最小);
+    const 最大值 = 取得屬性(this.手續費折扣欄位, 最大);
+
+    if (手續費折扣 < 最小值 || 手續費折扣 > 最大值) {
+      return;
+    }
+
+    return 手續費折扣;
   }
 
   get 檔數() {
-    return this.取得欄位數值("檔數欄位"); // TODO
+    let 檔數 = this.取得欄位數值("檔數欄位");
+    const 最小值 = 取得屬性(this.檔數欄位, 最小);
+    const 最大值 = 取得屬性(this.檔數欄位, 最大);
+
+    if (檔數 % 2 === 1) {
+      檔數++;
+    }
+
+    if (檔數 < 最小值 || 檔數 > 最大值) {
+      return;
+    }
+
+    return 檔數;
   }
 
   get 偏移量列表() {
@@ -105,7 +145,7 @@ class Calculator {
   }
   
   修正檔位(欄位, 價格) {
-    欄位[檔位] = this.換算檔位(價格);
+    欄位[間隔] = this.換算檔位(價格);
   }
   
   顯示表格() {
@@ -189,7 +229,7 @@ class Calculator {
 
     const 報價 = this.偏移量列表
       .map((初始偏移量) => {
-        const 成交價格檔位 = 取得數值(this.賣出價格欄位[檔位]);
+        const 成交價格檔位 = 取得數值(this.賣出價格欄位[間隔]);
         const 偏移量 = (初始偏移量 * 千 * 成交價格檔位) / 千;
         const 買入價格 = this.買入價格 * this.交易股數;
         const 賣出價格 = (this.賣出價格 + 偏移量) * this.交易股數;
