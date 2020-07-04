@@ -6,6 +6,10 @@ table {
   table-layout: fixed;
 }
 
+input, select {
+  font-size: 100%;
+}
+
 #gear {
   left: 15px;
   width: 30px;
