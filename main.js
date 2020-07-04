@@ -1,3 +1,5 @@
+'use strict';
+
 const 文件 = document;
 
 const 百 = 100;
