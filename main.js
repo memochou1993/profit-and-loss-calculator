@@ -5,6 +5,7 @@ const 值 = "value";
 const 最小 = "min";
 const 最大 = "max";
 const 間隔 = "step";
+const 類型 = "type";
 const 輸入 = "input";
 const 獲益顏色 = "red";
 const 虧損顏色 = "green";
@@ -26,6 +27,7 @@ const 註冊事件 = (節點, 事件, 函式) => 節點.addEventListener(事件,
 
 class Calculator {
   constructor() {
+    this.調整欄位類型();
     this.回填資料();
     this.註冊事件();
   }
@@ -147,6 +149,16 @@ class Calculator {
 
   取得損益金額顏色(損益金額) {
     return 損益金額 > 0 ? 獲益顏色 : 虧損顏色;
+  }
+
+  調整欄位類型() {
+    if (window.matchMedia("(max-width: 600px)").matches) {
+      this.買入價格欄位[類型] = "tel";
+      this.賣出價格欄位[類型] = "tel";
+      this.交易股數欄位[類型] = "tel";
+      this.手續費折扣欄位[類型] = "tel";
+      this.檔數欄位[類型] = "tel";
+    }
   }
 
   回填資料() {
