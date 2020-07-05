@@ -15,6 +15,7 @@ const 證券交易稅稅率 = 0.3 / 百;
 
 const 記住 = (名字, 內容) => localStorage.setItem(名字, 內容);
 const 想起 = (名字, 預設) => localStorage.getItem(名字) || 預設;
+const 忘記 = (名字) => localStorage.removeItem(名字);
 const 渲染 = (節點, 內容) => (節點["innerHTML"] = 內容);
 const 取得節點 = (名字) => 文件.getElementById(名字);
 const 取得數值 = (字串) => Number(字串);
@@ -67,8 +68,8 @@ class Calculator {
   get 買入價格() {
     const 買入價格 = this.取得欄位數值("買入價格欄位");
 
-    if (買入價格 < 1 || 買入價格 > 取得屬性(this.買入價格欄位, 最大)) {
-      return; // TODO: alert
+    if (!this.買入價格合理(買入價格)) {
+      return 0;
     }
 
     return 買入價格;
@@ -77,8 +78,8 @@ class Calculator {
   get 賣出價格() {
     const 賣出價格 = this.取得欄位數值("賣出價格欄位");
 
-    if (賣出價格 < 1 || 賣出價格 > 取得屬性(this.賣出價格欄位, 最大)) {
-      return; // TODO: alert
+    if (!this.賣出價格合理(賣出價格)) {
+      return 0;
     }
 
     return 賣出價格;
@@ -87,8 +88,8 @@ class Calculator {
   get 交易股數() {
     const 交易股數 = this.取得欄位數值("交易股數欄位");
 
-    if (交易股數 < 1 || 交易股數 > 取得屬性(this.交易股數欄位, 最大)) {
-      return; // TODO: alert
+    if (!this.交易股數合理(交易股數)) {
+      return 0;
     }
 
     return 交易股數;
@@ -96,11 +97,9 @@ class Calculator {
 
   get 手續費折扣() {
     const 手續費折扣 = this.取得欄位數值("手續費折扣欄位");
-    const 最小值 = 取得屬性(this.手續費折扣欄位, 最小);
-    const 最大值 = 取得屬性(this.手續費折扣欄位, 最大);
 
-    if (手續費折扣 < 最小值 || 手續費折扣 > 最大值) {
-      return; // TODO: alert
+    if (!this.手續費折扣合理(手續費折扣)) {
+      return 1;
     }
 
     return 手續費折扣;
@@ -108,15 +107,13 @@ class Calculator {
 
   get 檔數() {
     let 檔數 = this.取得欄位數值("檔數欄位");
-    const 最小值 = 取得屬性(this.檔數欄位, 最小);
-    const 最大值 = 取得屬性(this.檔數欄位, 最大);
 
     if (檔數 % 2 === 1) {
       檔數++;
     }
 
-    if (檔數 < 最小值 || 檔數 > 最大值) {
-      return; // TODO: alert
+    if (!this.檔數合理(檔數)) {
+      return 10;
     }
 
     return 檔數;
@@ -140,16 +137,16 @@ class Calculator {
     欄位[值] = 想起(名字, 預設);
   }
 
-  記住欄位(名字, 事件) {
-    記住(名字, 事件.target.value);
-  }
-
   修正檔位(欄位, 價格) {
     欄位[間隔] = this.換算檔位(價格);
   }
 
   顯示表格() {
     this.表格節點.hidden = false;
+  }
+
+  隱藏表格() {
+    this.表格節點.hidden = true;
   }
 
   格式化數值(數值) {
@@ -164,8 +161,8 @@ class Calculator {
     return 證券交易稅稅率 * (交易別 === "現沖" ? 0.5 : 1);
   }
 
-  取得欄位數值(欄位) {
-    return 取得數值(取得屬性(this[欄位], 值));
+  取得欄位數值(欄位, 屬性 = 值) {
+    return 取得數值(取得屬性(this[欄位], 屬性));
   }
 
   取得成交價格顏色(偏移量) {
@@ -191,11 +188,15 @@ class Calculator {
     });
 
     註冊事件(this.手續費折扣欄位, 輸入, (event) => {
-      this.記住欄位("手續費折扣", event);
+      const 手續費折扣 = 取得數值(event.target.value);
+
+      this.手續費折扣合理(手續費折扣) ? 記住("手續費折扣", 手續費折扣) : 忘記("手續費折扣");
     });
 
     註冊事件(this.檔數欄位, 輸入, (event) => {
-      this.記住欄位("檔數", event);
+      const 檔數 = 取得數值(event.target.value);
+      
+      this.檔數合理(檔數) ? 記住("檔數", 檔數) : 忘記("檔數");
     });
 
     註冊事件(文件, 輸入, () => {
@@ -222,8 +223,29 @@ class Calculator {
     }
   }
 
+  買入價格合理(買入價格) {
+    return 買入價格 >= 1 && 買入價格 <= this.取得欄位數值("買入價格欄位", 最大);
+  }
+
+  賣出價格合理(賣出價格) {
+    return 賣出價格 >= 1 && 賣出價格 <= this.取得欄位數值("賣出價格欄位", 最大);
+  }
+
+  交易股數合理(交易股數) {
+    return 交易股數 >= 1 && 交易股數 <= this.取得欄位數值("交易股數欄位", 最大);
+  }
+
+  手續費折扣合理(手續費折扣) {
+    return 手續費折扣 >= this.取得欄位數值("手續費折扣欄位", 最小) && 手續費折扣 <= this.取得欄位數值("手續費折扣欄位", 最大);
+  }
+
+  檔數合理(檔數) {
+    return 檔數 >= this.取得欄位數值("檔數欄位", 最小) && 檔數 <= this.取得欄位數值("檔數欄位", 最大);
+  }
+
   處理報價() {
     if (!this.完成表單) {
+      this.隱藏表格();
       return;
     }
 
