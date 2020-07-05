@@ -13,7 +13,7 @@ const 成交價格顏色 = "gold";
 const 公定手續費費率 = 0.1425 / 百;
 const 證券交易稅稅率 = 0.3 / 百;
 const 預設手續費折扣 = 1;
-const 預設檔數 = 10;
+const 預設檔數 = 5;
 
 const 記住 = (名字, 內容) => localStorage.setItem(名字, 內容);
 const 想起 = (名字, 預設) => localStorage.getItem(名字) || 預設;
@@ -93,9 +93,7 @@ class Calculator {
   }
 
   get 檔數() {
-    let 檔數 = this.取得欄位數值("檔數欄位");
-
-    檔數 += 檔數 % 2;
+    const 檔數 = this.取得欄位數值("檔數欄位");
 
     return this.檔數合理(檔數) ? 檔數 : 預設檔數;
   }
@@ -103,7 +101,7 @@ class Calculator {
   get 偏移量列表() {
     const 檔數 = this.檔數;
 
-    return [...Array(檔數 + 1).keys()].map((v) => v - 檔數 / 2);
+    return [...Array(檔數 * 2 + 1).keys()].map((v) => v - 檔數);
   }
 
   get 完成表單() {
