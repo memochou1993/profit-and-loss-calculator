@@ -68,7 +68,7 @@ class Calculator {
     const 買入價格 = this.取得欄位數值("買入價格欄位");
 
     if (買入價格 < 1 || 買入價格 > 取得屬性(this.買入價格欄位, 最大)) {
-      return; // alert
+      return; // TODO: alert
     }
 
     return 買入價格;
@@ -78,7 +78,7 @@ class Calculator {
     const 賣出價格 = this.取得欄位數值("賣出價格欄位");
 
     if (賣出價格 < 1 || 賣出價格 > 取得屬性(this.賣出價格欄位, 最大)) {
-      return;
+      return; // TODO: alert
     }
 
     return 賣出價格;
@@ -88,7 +88,7 @@ class Calculator {
     const 交易股數 = this.取得欄位數值("交易股數欄位");
 
     if (交易股數 < 1 || 交易股數 > 取得屬性(this.交易股數欄位, 最大)) {
-      return;
+      return; // TODO: alert
     }
 
     return 交易股數;
@@ -100,7 +100,7 @@ class Calculator {
     const 最大值 = 取得屬性(this.手續費折扣欄位, 最大);
 
     if (手續費折扣 < 最小值 || 手續費折扣 > 最大值) {
-      return;
+      return; // TODO: alert
     }
 
     return 手續費折扣;
@@ -116,7 +116,7 @@ class Calculator {
     }
 
     if (檔數 < 最小值 || 檔數 > 最大值) {
-      return;
+      return; // TODO: alert
     }
 
     return 檔數;

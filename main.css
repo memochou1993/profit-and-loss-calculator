@@ -6,9 +6,7 @@ table {
   table-layout: fixed;
 }
 
-input, select {
-  font-size: 100%;
-}
+/** TODO: iPhone 聚焦問題 */
 
 #gear {
   left: 15px;
