@@ -9,7 +9,7 @@ const 類型 = "type";
 const 輸入 = "input";
 const 獲益顏色 = "blue";
 const 虧損顏色 = "red";
-const 成交價格顏色 = "gold";
+const 賣出價格背景顏色 = "gold";
 const 公定手續費費率 = 0.1425 / 百;
 const 證券交易稅稅率 = 0.3 / 百;
 const 預設手續費折扣 = 1;
@@ -145,8 +145,8 @@ class Calculator {
     return 取得數值(取得屬性(this[欄位], 屬性));
   }
 
-  取得成交價格顏色(偏移量) {
-    return 偏移量 === 0 && this.檔數 > 0 ? 成交價格顏色 : "";
+  取得賣出價格背景顏色(偏移量) {
+    return 偏移量 === 0 && this.檔數 > 0 ? 賣出價格背景顏色 : "";
   }
 
   取得損益金額顏色(損益金額) {
@@ -263,11 +263,11 @@ class Calculator {
         const 實收總金額 = 市值 - 賣出手續費 - 證券交易稅;
         const 損益金額 = 實收總金額 - 支付總金額;
         const 報酬率 = 損益金額 / 成本;
-        const 成交價格顏色 = this.取得成交價格顏色(偏移量);
+        const 賣出價格背景顏色 = this.取得賣出價格背景顏色(偏移量);
         const 損益金額顏色 = this.取得損益金額顏色(損益金額);
 
         return `
-          <tr class="text-center" style="background: ${成交價格顏色};">
+          <tr class="text-center" style="background:${賣出價格背景顏色};">
             <td>
               ${this.格式化數值(成交價格)}
             </td>
