@@ -154,7 +154,7 @@ class Calculator {
   }
 
   調整欄位類型() {
-    if (window.matchMedia("(max-width: 600px)").matches) {
+    if (window.matchMedia("(max-width: 1024px)").matches) {
       this.買入價格欄位[類型] = "tel";
       this.賣出價格欄位[類型] = "tel";
       this.交易股數欄位[類型] = "tel";
