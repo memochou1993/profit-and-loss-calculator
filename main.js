@@ -1,5 +1,4 @@
 const 文件 = document;
-
 const 百 = 100;
 const 千 = 1000;
 const 值 = "value";
@@ -12,6 +11,8 @@ const 虧損顏色 = "green";
 const 成交價格顏色 = "gold";
 const 公定手續費費率 = 0.1425 / 百;
 const 證券交易稅稅率 = 0.3 / 百;
+const 預設手續費折扣 = 1;
+const 預設檔數 = 10;
 
 const 記住 = (名字, 內容) => localStorage.setItem(名字, 內容);
 const 想起 = (名字, 預設) => localStorage.getItem(名字) || 預設;
@@ -68,59 +69,39 @@ class Calculator {
   get 買入價格() {
     const 買入價格 = this.取得欄位數值("買入價格欄位");
 
-    if (!this.買入價格合理(買入價格)) {
-      return 0;
-    }
-
-    return 買入價格;
+    return this.買入價格合理(買入價格) ? 買入價格 : 0;
   }
 
   get 賣出價格() {
     const 賣出價格 = this.取得欄位數值("賣出價格欄位");
 
-    if (!this.賣出價格合理(賣出價格)) {
-      return 0;
-    }
-
-    return 賣出價格;
+    return this.賣出價格合理(賣出價格) ? 賣出價格 : 0;
   }
 
   get 交易股數() {
     const 交易股數 = this.取得欄位數值("交易股數欄位");
 
-    if (!this.交易股數合理(交易股數)) {
-      return 0;
-    }
-
-    return 交易股數;
+    return this.交易股數合理(交易股數) ? 交易股數 : 0;
   }
 
   get 手續費折扣() {
     const 手續費折扣 = this.取得欄位數值("手續費折扣欄位");
 
-    if (!this.手續費折扣合理(手續費折扣)) {
-      return 1;
-    }
-
-    return 手續費折扣;
+    return this.手續費折扣合理(手續費折扣) ? 手續費折扣 : 預設手續費折扣;
   }
 
   get 檔數() {
     let 檔數 = this.取得欄位數值("檔數欄位");
 
-    if (檔數 % 2 === 1) {
-      檔數++;
-    }
+    檔數 += 檔數 % 2;
 
-    if (!this.檔數合理(檔數)) {
-      return 10;
-    }
-
-    return 檔數;
+    return this.檔數合理(檔數) ? 檔數 : 預設檔數;
   }
 
   get 偏移量列表() {
-    return [...Array(this.檔數 + 1).keys()].map((v) => v - this.檔數 / 2);
+    const 檔數 = this.檔數;
+
+    return [...Array(檔數 + 1).keys()].map((v) => v - 檔數 / 2);
   }
 
   get 完成表單() {
@@ -131,10 +112,6 @@ class Calculator {
       this.手續費折扣 &&
       this.檔數
     );
-  }
-
-  回填(欄位, 名字, 預設) {
-    欄位[值] = 想起(名字, 預設);
   }
 
   修正檔位(欄位, 價格) {
@@ -174,8 +151,8 @@ class Calculator {
   }
 
   回填資料() {
-    this.回填(this.手續費折扣欄位, "手續費折扣", this.取得欄位數值("手續費折扣欄位"));
-    this.回填(this.檔數欄位, "檔數", this.取得欄位數值("檔數欄位"));
+    this.手續費折扣欄位[值] = 想起("手續費折扣", 預設手續費折扣);
+    this.檔數欄位[值] = 想起("檔數", 預設檔數);
   }
 
   註冊事件() {
@@ -195,7 +172,7 @@ class Calculator {
 
     註冊事件(this.檔數欄位, 輸入, (event) => {
       const 檔數 = 取得數值(event.target.value);
-      
+
       this.檔數合理(檔數) ? 記住("檔數", 檔數) : 忘記("檔數");
     });
 
@@ -236,11 +213,17 @@ class Calculator {
   }
 
   手續費折扣合理(手續費折扣) {
-    return 手續費折扣 >= this.取得欄位數值("手續費折扣欄位", 最小) && 手續費折扣 <= this.取得欄位數值("手續費折扣欄位", 最大);
+    return (
+      手續費折扣 >= this.取得欄位數值("手續費折扣欄位", 最小) &&
+      手續費折扣 <= this.取得欄位數值("手續費折扣欄位", 最大)
+    );
   }
 
   檔數合理(檔數) {
-    return 檔數 >= this.取得欄位數值("檔數欄位", 最小) && 檔數 <= this.取得欄位數值("檔數欄位", 最大);
+    return (
+      檔數 >= this.取得欄位數值("檔數欄位", 最小) &&
+      檔數 <= this.取得欄位數值("檔數欄位", 最大)
+    );
   }
 
   處理報價() {
