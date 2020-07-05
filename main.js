@@ -106,11 +106,10 @@ class Calculator {
 
   get 完成表單() {
     return (
-      this.買入價格 &&
-      this.賣出價格 &&
-      this.交易股數 &&
-      this.手續費折扣 &&
-      this.檔數
+      this.買入價格 > 0 &&
+      this.賣出價格 > 0 &&
+      this.交易股數 > 0 &&
+      this.手續費折扣 > 0
     );
   }
 
@@ -127,7 +126,7 @@ class Calculator {
   }
 
   格式化數值(數值) {
-    return Number(數值.toFixed(2)).toLocaleString();
+    return 取得數值(數值.toFixed(2)).toLocaleString();
   }
 
   精算手續費(手續費) {
@@ -143,7 +142,7 @@ class Calculator {
   }
 
   取得成交價格顏色(偏移量) {
-    return 偏移量 === 0 ? 成交價格顏色 : "";
+    return (偏移量 === 0 && this.檔數 > 0) ? 成交價格顏色 : "";
   }
 
   取得損益金額顏色(損益金額) {
