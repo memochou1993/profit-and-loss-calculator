@@ -6,8 +6,6 @@ table {
   table-layout: fixed;
 }
 
-/** TODO: iPhone 聚焦問題 */
-
 #gear {
   left: 15px;
   width: 30px;
@@ -28,7 +26,7 @@ table {
 }
 
 @media only screen and (min-width: 600px) {
-  #settings {
+  #setting {
     display: none;
   }
 }
