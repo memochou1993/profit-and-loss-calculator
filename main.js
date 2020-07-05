@@ -138,7 +138,7 @@ class Calculator {
   }
 
   取得欄位數值(欄位, 屬性 = 值) {
-    return 取得數值(取得屬性(this[欄位], 屬性));
+    return 取得數值(取得屬性(this[欄位], 屬性).replace(/#/, '.'));
   }
 
   取得成交價格顏色(偏移量) {
@@ -154,6 +154,7 @@ class Calculator {
       this.買入價格欄位[類型] = "tel";
       this.賣出價格欄位[類型] = "tel";
       this.交易股數欄位[類型] = "tel";
+      this.手續費折扣欄位[類型] = "tel";
       this.檔數欄位[類型] = "tel";
     }
   }
