@@ -125,6 +125,10 @@ class Calculator {
     this.表格節點.hidden = true;
   }
 
+  修正小數點(欄位) {
+    欄位[值] = 欄位[值].replace(/#/, '.');
+  }
+
   格式化數值(數值) {
     return 取得數值(數值.toFixed(2)).toLocaleString();
   }
@@ -138,7 +142,7 @@ class Calculator {
   }
 
   取得欄位數值(欄位, 屬性 = 值) {
-    return 取得數值(取得屬性(this[欄位], 屬性).replace(/#/, '.'));
+    return 取得數值(取得屬性(this[欄位], 屬性));
   }
 
   取得成交價格顏色(偏移量) {
@@ -167,16 +171,19 @@ class Calculator {
   註冊事件() {
     註冊事件(this.買入價格欄位, 輸入, () => {
       this.修正檔位(this.買入價格欄位, this.買入價格);
+      this.修正小數點(this.買入價格欄位);
     });
 
     註冊事件(this.賣出價格欄位, 輸入, () => {
       this.修正檔位(this.賣出價格欄位, this.賣出價格);
+      this.修正小數點(this.賣出價格欄位);
     });
 
     註冊事件(this.手續費折扣欄位, 輸入, (event) => {
       const 手續費折扣 = 取得數值(event.target.value);
 
       this.手續費折扣合理(手續費折扣) ? 記住("手續費折扣", 手續費折扣) : 忘記("手續費折扣");
+      this.修正小數點(this.手續費折扣欄位);
     });
 
     註冊事件(this.檔數欄位, 輸入, (event) => {
