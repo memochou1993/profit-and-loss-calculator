@@ -26,10 +26,10 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="交易別">交易別</label>
-                    <select class="form-control form-control-sm" id="交易別">
+                    <label for="交易類別">交易類別</label>
+                    <select class="form-control form-control-sm" id="交易類別">
                         <option value="現股">現股</option>
-                        <option value="現沖">現沖</option>
+                        <option value="現股當沖">現股當沖</option>
                     </select>
                 </div>
             </div>
@@ -70,12 +70,24 @@
                 </thead>
                 <tbody id="報價"></tbody>
             </table>
-            <div class="text-right" id="footer">
-                Powered by
-                <a href="https://github.com/memochou1993/profit-and-loss-calculator" rel="noopener noreferrer" target="_blank">
-                    Memo Chou
-                </a>
-            </div>
+        </div>
+        <div class="jumbotron mt-4 mb-3 py-4">
+            <p class="lead">使用說明</p>
+            <hr>
+            <ul>
+                <li>公定手續費費率：0.1425%</li>
+                <li>證券交易稅稅率：0.3%</li>
+                <li>現股當沖證券交易稅稅率減半</li>
+                <li>小數點按四捨五入計算</li>
+                <li>電腦版使用上下鍵調整價格</li>
+                <li>手機版使用井字號輸入小數點</li>
+            </ul>
+        </div>
+        <div class="text-right" id="footer">
+            Powered by
+            <a href="https://github.com/memochou1993/profit-and-loss-calculator" rel="noopener noreferrer" target="_blank">
+                Memo Chou
+            </a>
         </div>
     </div>
 

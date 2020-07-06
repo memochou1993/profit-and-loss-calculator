@@ -21,7 +21,7 @@ const 忘記 = (名字) => localStorage.removeItem(名字);
 const 渲染 = (節點, 內容) => (節點["innerHTML"] = 內容);
 const 取得節點 = (名字) => 文件.getElementById(名字);
 const 取得數值 = (字串) => Number(字串);
-const 取得整數 = (數值) => Math.floor(數值);
+const 取得整數 = (數值) => Math.round(數值);
 const 取得屬性 = (節點, 標籤) => 節點[標籤];
 const 註冊事件 = (節點, 事件, 函式) => 節點.addEventListener(事件, 函式);
 
@@ -32,8 +32,8 @@ class Calculator {
     this.註冊事件();
   }
 
-  get 交易別欄位() {
-    return 取得節點("交易別");
+  get 交易類別欄位() {
+    return 取得節點("交易類別");
   }
 
   get 買入價格欄位() {
@@ -64,8 +64,8 @@ class Calculator {
     return 取得節點("報價");
   }
 
-  get 交易別() {
-    return 取得屬性(this.交易別欄位, 值);
+  get 交易類別() {
+    return 取得屬性(this.交易類別欄位, 值);
   }
 
   get 買入價格() {
@@ -137,8 +137,8 @@ class Calculator {
     return 取得整數(手續費 < 20 ? 20 : 手續費);
   }
 
-  精算證券交易稅稅率(交易別) {
-    return 證券交易稅稅率 * (交易別 === "現沖" ? 0.5 : 1);
+  精算證券交易稅稅率(交易類別) {
+    return 證券交易稅稅率 * (交易類別 === "現股當沖" ? 0.5 : 1);
   }
 
   取得欄位數值(欄位, 屬性 = 值) {
@@ -258,7 +258,7 @@ class Calculator {
         const 手續費費率 = 公定手續費費率 * this.手續費折扣;
         const 買入手續費 = this.精算手續費(成本 * 手續費費率);
         const 賣出手續費 = this.精算手續費(市值 * 手續費費率);
-        const 證券交易稅 = 取得整數(市值 * this.精算證券交易稅稅率(this.交易別));
+        const 證券交易稅 = 取得整數(市值 * this.精算證券交易稅稅率(this.交易類別));
         const 支付總金額 = 成本 + 買入手續費;
         const 實收總金額 = 市值 - 賣出手續費 - 證券交易稅;
         const 損益金額 = 實收總金額 - 支付總金額;
