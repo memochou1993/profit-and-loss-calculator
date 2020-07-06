@@ -8,7 +8,7 @@ table {
 
 #gear {
   left: 15px;
-  width: 30px;
+  width: 40px;
   bottom: 15px;
   margin: 10px;
   cursor: pointer;
@@ -19,13 +19,13 @@ table {
   font-size: 12px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
   #gear {
     display: none;
   }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 1024px) {
   #setting {
     display: none;
   }
