@@ -297,35 +297,3 @@ class Calculator {
 }
 
 new Calculator();
-
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .register("/pwa-examples/a2hs/sw.js")
-    .then(function() { console.log("Service Worker Registered"); });
-}
-
-let deferredPrompt;
-const addBtn = document.querySelector(".add-button");
-button.style.display = "none";
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-
-  deferredPrompt = e;
-
-  button.style.display = "block";
-
-  button.addEventListener("click", (e) => {
-    button.style.display = "none";
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === "accepted") {
-          console.log("User accepted the A2HS prompt");
-        } else {
-          console.log("User dismissed the A2HS prompt");
-        }
-
-        deferredPrompt = null;
-      });
-  });
-});
