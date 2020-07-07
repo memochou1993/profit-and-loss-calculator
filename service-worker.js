@@ -1,12 +1,3 @@
-self.addEventListener("install", (event) => {
-});
-
-self.addEventListener("activate", (event) => {
-});
-
-self.addEventListener("fetch", (event) => {
-});
-
 window.addEventListener("beforeinstallprompt", (event) => {
     event.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === "dismissed") {
