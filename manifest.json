@@ -1,15 +1,15 @@
 {
-    "name": "股票交易計算器",
-    "short_name": "股票計算器",
-    "start_url": "/",
-    "display": "fullscreen",
-    "description": "要賣多少才好？",
-    "icons": [
-      {
-        "src": "images/icon.png",
-        "sizes": "64x64",
-        "type": "image/png"
-      }
-    ],
-    "background_color": "grey"
+  "name": "股票交易計算器",
+  "short_name": "股票計算器",
+  "start_url": "/",
+  "display": "fullscreen",
+  "description": "要賣多少才好？",
+  "icons": [
+    {
+      "src": "images/icon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "grey"
 }
