@@ -3,8 +3,11 @@ self.addEventListener('install', (e) => {
     caches.open('store').then((cache) => {
       return cache.addAll([
         'index.html',
-        'app.js',
-        'app.css',
+        'css/bootstrap.min.css',
+        'css/app.css',
+        'js/jquery.min.js',
+        'js/bootstrap.min.js',
+        'js/app.js',
       ]);
     })
   );
