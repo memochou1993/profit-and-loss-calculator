@@ -1,0 +1,9 @@
+{
+    "name": "股市交易計算器",
+    "short_name": "計算器",
+    "theme_color": "#f32121",
+    "background_color": "#213cf3",
+    "display": "browser",
+    "scope": "/",
+    "start_url": "/"
+}
