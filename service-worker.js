@@ -1,9 +1,12 @@
-window.addEventListener("beforeinstallprompt", (event) => {
-    event.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === "dismissed") {
-           console.log("取消安裝至桌面");
-        } else {
-           console.log("接受安裝至桌面");
-        }
-    });
-});
+self.addEventListener('install', (e) => {
+  e.waitUntil(
+    caches.open('store').then((cache) => {
+      return cache.addAll([
+        '/index.html',
+        '/app.js',
+        '/app.css',
+      ]);
+    })
+  );
+ });
+ 
