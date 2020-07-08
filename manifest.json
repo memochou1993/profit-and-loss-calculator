@@ -21,5 +21,6 @@
       "type": "image/png"
     }
   ],
-  "background_color": "grey"
+  "background_color": "grey",
+  "theme_color": "white"
 }
