@@ -6,12 +6,8 @@ const 千 = 1000;
 const 值 = "value";
 const 最小 = "min";
 const 最大 = "max";
-const 電話 = "tel";
 const 間隔 = "step";
 const 輸入 = "input";
-const 載入 = "load";
-const 輸入模式 = "inputmode";
-const 服務工作 = "serviceWorker";
 const 獲益顏色 = "blue";
 const 虧損顏色 = "red";
 const 賣出價格背景顏色 = "gold";
@@ -23,7 +19,9 @@ const 預設檔數 = 5;
 const 記住 = (名字, 內容) => localStorage.setItem(名字, 內容);
 const 想起 = (名字, 預設) => localStorage.getItem(名字) || 預設;
 const 忘記 = (名字) => localStorage.removeItem(名字);
-const 渲染 = (節點, 內容) => (節點["innerHTML"] = 內容);
+const 顯示 = (節點) => (節點.hidden = false);
+const 隱藏 = (節點) => (節點.hidden = true);
+const 渲染 = (節點, 內容) => (節點.innerHTML = 內容);
 const 取得節點 = (名字) => 文件.getElementById(名字);
 const 取得數值 = (字串) => Number(字串);
 const 取得整數 = (數值) => Math.round(數值);
@@ -32,16 +30,15 @@ const 註冊事件 = (節點, 事件, 函式) => 節點.addEventListener(事件,
 
 class Calculator {
   constructor() {
-    this.調整欄位類型();
     this.回填資料();
     this.註冊事件();
 
     if (window.matchMedia('(display-mode: standalone)').matches) {
-      取得節點("repository").hidden = true; // FIXME
+      //
     }
 
     if (window.matchMedia('(display-mode: fullscreen)').matches) {
-      取得節點("repository").hidden = true; // FIXME
+      //
     }
   }
 
@@ -130,14 +127,6 @@ class Calculator {
     欄位[間隔] = 升降單位;
   }
 
-  顯示表格() {
-    this.表格節點.hidden = false;
-  }
-
-  隱藏表格() {
-    this.表格節點.hidden = true;
-  }
-
   修正小數點(欄位) {
     欄位[值] = 欄位[值].replace(/#/, ".");
   }
@@ -164,13 +153,6 @@ class Calculator {
 
   取得損益金額顏色(損益金額) {
     return 損益金額 > 0 ? 獲益顏色 : 虧損顏色;
-  }
-
-  調整欄位類型() {
-    if (window.matchMedia("(max-width: 1024px)").matches) {
-      this.交易股數欄位.setAttribute("type", "tel");
-      this.檔數欄位.setAttribute("type", "tel");
-    }
   }
 
   回填資料() {
@@ -262,7 +244,7 @@ class Calculator {
 
   處理報價() {
     if (!this.完成表單) {
-      this.隱藏表格();
+      隱藏(this.表格節點);
       return;
     }
 
@@ -302,7 +284,7 @@ class Calculator {
 
     渲染(this.報價節點, 報價);
 
-    this.顯示表格();
+    顯示(this.表格節點);
   }
 }
 
