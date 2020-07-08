@@ -1,4 +1,6 @@
 const 文件 = document;
+const 導航 = navigator;
+const 視窗 = window;
 const 百 = 100;
 const 千 = 1000;
 const 值 = "value";
@@ -7,6 +9,8 @@ const 最大 = "max";
 const 間隔 = "step";
 const 類型 = "type";
 const 輸入 = "input";
+const 載入 = "load";
+const 服務工作 = "serviceWorker";
 const 獲益顏色 = "blue";
 const 虧損顏色 = "red";
 const 賣出價格背景顏色 = "gold";
@@ -169,6 +173,12 @@ class Calculator {
   }
 
   註冊事件() {
+    if (服務工作 in 導航) {
+      window.addEventListener(載入, () => {
+        視窗.serviceWorker.register("./../service-worker.js");
+      });
+    }
+
     註冊事件(this.買入價格欄位, 輸入, () => {
       this.修正間隔(this.買入價格欄位, this.換算檔位(this.買入價格));
       this.修正小數點(this.買入價格欄位);
