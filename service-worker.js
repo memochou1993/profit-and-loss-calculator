@@ -4,6 +4,7 @@ self.addEventListener("install", (e) => {
       return cache.addAll([
         "/profit-and-loss-calculator/",
         "/profit-and-loss-calculator/index.html",
+        "/profit-and-loss-calculator/images/repository.png",
         "/profit-and-loss-calculator/css/bootstrap.min.css",
         "/profit-and-loss-calculator/css/app.css",
         "/profit-and-loss-calculator/js/jquery.min.js",
@@ -15,7 +16,6 @@ self.addEventListener("install", (e) => {
 });
 
 self.addEventListener("fetch", (e) => {
-  console.log(e.request.url);
   e.respondWith(
     caches.match(e.request).then((response) => {
       return response || fetch(e.request);
