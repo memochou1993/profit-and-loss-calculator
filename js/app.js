@@ -173,11 +173,11 @@ class Calculator {
   }
 
   註冊事件() {
-    // if (服務工作 in 導航) {
-    //   window.addEventListener(載入, () => {
-    //     視窗.serviceWorker.register("./../service-worker.js");
-    //   });
-    // }
+    if (服務工作 in 導航) {
+      window.addEventListener(載入, () => {
+        視窗.serviceWorker.register("./../service-worker.js");
+      });
+    }
 
     註冊事件(this.買入價格欄位, 輸入, () => {
       this.修正間隔(this.買入價格欄位, this.換算檔位(this.買入價格));
