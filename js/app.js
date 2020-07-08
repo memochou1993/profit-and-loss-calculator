@@ -6,10 +6,12 @@ const 千 = 1000;
 const 值 = "value";
 const 最小 = "min";
 const 最大 = "max";
+const 文字 = "text";
 const 間隔 = "step";
 const 類型 = "type";
 const 輸入 = "input";
 const 載入 = "load";
+const 輸入模式 = "inputmode";
 const 服務工作 = "serviceWorker";
 const 獲益顏色 = "blue";
 const 虧損顏色 = "red";
@@ -159,10 +161,13 @@ class Calculator {
 
   調整欄位類型() {
     if (window.matchMedia("(max-width: 1024px)").matches) {
-      this.買入價格欄位[類型] = "tel";
-      this.賣出價格欄位[類型] = "tel";
+      this.買入價格欄位[類型] = "text";
+      this.買入價格欄位[輸入模式] = "decimal";
+      this.賣出價格欄位[類型] = "text";
+      this.賣出價格欄位[輸入模式] = "decimal";
       this.交易股數欄位[類型] = "tel";
-      this.手續費折扣欄位[類型] = "tel";
+      this.手續費折扣欄位[類型] = "text";
+      this.手續費折扣欄位[輸入模式] = "decimal";
       this.檔數欄位[類型] = "tel";
     }
   }
