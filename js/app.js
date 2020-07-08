@@ -180,7 +180,7 @@ class Calculator {
   註冊事件() {
     if (服務工作 in 導航) {
       註冊事件(視窗, 載入, () => {
-        導航.serviceWorker.register("./../service-worker.js");
+        導航.serviceWorker.register("./service-worker.js");
       });
     }
 
