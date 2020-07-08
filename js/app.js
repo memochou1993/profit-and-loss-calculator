@@ -172,7 +172,7 @@ class Calculator {
 
   註冊事件() {
     if (服務工作 in 導航) {
-      導航.serviceWorker.register("/profit-and-loss-calculator/service-worker.js");
+      導航.serviceWorker.register("/profit-and-loss-calculator/js/service-worker.js");
     }
 
     註冊事件(this.買入價格欄位, 輸入, () => {
