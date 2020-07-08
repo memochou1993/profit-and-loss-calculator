@@ -6,8 +6,18 @@
   "description": "要賣多少才好？",
   "icons": [
     {
-      "src": "images/icon.png",
+      "src": "images/icon_64x64.png",
       "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src":"images/icon_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src":"images/icon_512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
