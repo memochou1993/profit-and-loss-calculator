@@ -1,7 +1,7 @@
 {
   "name": "股票交易計算器",
   "short_name": "股票計算器",
-  "start_url": "/",
+  "start_url": "/profit-and-loss-calculator/",
   "display": "fullscreen",
   "description": "要賣多少才好？",
   "icons": [
