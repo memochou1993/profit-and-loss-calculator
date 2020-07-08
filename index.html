@@ -116,24 +116,19 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/app.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./service-worker.js');
+        });
+    }
+    </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117292723-8"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-117292723-8');
-    </script>
-    <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./service-worker.js')
-                .then((reg) => {
-                    console.log('Service worker registered.', reg);
-                });
-        });
-    }
     </script>
 </body>
 </html>
