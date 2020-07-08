@@ -9,7 +9,6 @@ self.addEventListener("install", (e) => {
         "/profit-and-loss-calculator/js/jquery.min.js",
         "/profit-and-loss-calculator/js/bootstrap.min.js",
         "/profit-and-loss-calculator/js/app.js",
-        "/profit-and-loss-calculator/images/repository.png",
       ]);
     })
   );

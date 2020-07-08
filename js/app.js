@@ -35,6 +35,14 @@ class Calculator {
     this.調整欄位類型();
     this.回填資料();
     this.註冊事件();
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      取得節點("repository").hidden = false; // FIXME
+    }
+
+    if (window.matchMedia('(display-mode: fullscreen)').matches) {
+      取得節點("repository").hidden = false; // FIXME
+    }
   }
 
   get 交易類別欄位() {
