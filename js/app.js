@@ -37,11 +37,11 @@ class Calculator {
     this.註冊事件();
 
     if (window.matchMedia('(display-mode: standalone)').matches) {
-      取得節點("repository").hidden = false; // FIXME
+      取得節點("repository").hidden = true; // FIXME
     }
 
     if (window.matchMedia('(display-mode: fullscreen)').matches) {
-      取得節點("repository").hidden = false; // FIXME
+      取得節點("repository").hidden = true; // FIXME
     }
   }
 
