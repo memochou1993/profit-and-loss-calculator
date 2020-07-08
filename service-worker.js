@@ -2,7 +2,7 @@ self.addEventListener("install", (e) => {
   e.waitUntil(
     caches.open("store").then((cache) => {
       return cache.addAll([
-        "/profit-and-loss-calculator",
+        "/profit-and-loss-calculator/",
         "/profit-and-loss-calculator/index.html",
         "/profit-and-loss-calculator/css/bootstrap.min.css",
         "/profit-and-loss-calculator/css/app.css",
