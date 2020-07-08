@@ -8,6 +8,7 @@ self.addEventListener('install', (e) => {
         'js/jquery.min.js',
         'js/bootstrap.min.js',
         'js/app.js',
+        'images/repository.png',
       ]);
     })
   );
