@@ -6,6 +6,10 @@ table {
   table-layout: fixed;
 }
 
+.jumbotron {
+  font-weight: 300;
+}
+
 #gear {
   left: 15px;
   width: 40px;
