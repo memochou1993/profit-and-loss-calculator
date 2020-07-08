@@ -2,19 +2,21 @@ self.addEventListener("install", (e) => {
   e.waitUntil(
     caches.open("store").then((cache) => {
       return cache.addAll([
-        "index.html",
-        "css/bootstrap.min.css",
-        "css/app.css",
-        "js/jquery.min.js",
-        "js/bootstrap.min.js",
-        "js/app.js",
-        "images/repository.png",
+        "/profit-and-loss-calculator",
+        "/profit-and-loss-calculator/index.html",
+        "/profit-and-loss-calculator/css/bootstrap.min.css",
+        "/profit-and-loss-calculator/css/app.css",
+        "/profit-and-loss-calculator/js/jquery.min.js",
+        "/profit-and-loss-calculator/js/bootstrap.min.js",
+        "/profit-and-loss-calculator/js/app.js",
+        "/profit-and-loss-calculator/images/repository.png",
       ]);
     })
   );
 });
 
 self.addEventListener("fetch", (e) => {
+  console.log(e.request.url);
   e.respondWith(
     caches.match(e.request).then((response) => {
       return response || fetch(e.request);
