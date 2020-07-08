@@ -6,11 +6,8 @@ const 千 = 1000;
 const 值 = "value";
 const 最小 = "min";
 const 最大 = "max";
-const 文字 = "text";
-const 小數 = "decimal";
 const 電話 = "tel";
 const 間隔 = "step";
-const 類型 = "type";
 const 輸入 = "input";
 const 載入 = "load";
 const 輸入模式 = "inputmode";
@@ -163,14 +160,8 @@ class Calculator {
 
   調整欄位類型() {
     if (window.matchMedia("(max-width: 1024px)").matches) {
-      this.買入價格欄位.setAttribute(類型, 文字);
-      this.買入價格欄位.setAttribute(輸入模式, 小數);
-      this.賣出價格欄位.setAttribute(類型, 文字);
-      this.賣出價格欄位.setAttribute(輸入模式, 小數);
-      this.交易股數欄位.setAttribute(類型, 電話);
-      this.手續費折扣欄位.setAttribute(類型, 文字);
-      this.手續費折扣欄位.setAttribute(輸入模式, 小數);
-      this.檔數欄位.setAttribute(類型, 電話);
+      this.交易股數欄位.setAttribute("type", "tel");
+      this.檔數欄位.setAttribute("type", "tel");
     }
   }
 
