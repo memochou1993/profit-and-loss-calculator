@@ -228,6 +228,10 @@ class 計算器 {
   }
 
   處理顯示模式() {
+    this.詳細模式
+      ? 取得節點("表格").classList.add("table-responsive-md")
+      : 取得節點("表格").classList.remove("table-responsive-md");
+
     Array.from(取得相同類別節點("詳細欄位")).forEach(節點 => {
       this.詳細模式 ? 顯示(節點) : 隱藏(節點);
     });
