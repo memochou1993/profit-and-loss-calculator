@@ -61,10 +61,15 @@
             </div>
         </div>
         <div id="表格" hidden>
-            <table class="table table-sm table-bordered table-striped mb-4">
+            <table class="table table-sm table-bordered table-striped table-responsive-md mb-4">
                 <thead class="thead-dark">
                     <tr class="text-center">
                         <th>成交價格</th>
+                        <th class="詳細欄位" hidden>支付總金額</th>
+                        <th class="詳細欄位" hidden>實收總金額</th>
+                        <th class="詳細欄位" hidden>買入手續費</th>
+                        <th class="詳細欄位" hidden>賣出手續費</th>
+                        <th class="詳細欄位" hidden>證券交易稅</th>
                         <th>損益金額</th>
                         <th>報酬率</th>
                     </tr>
@@ -80,7 +85,7 @@
         <div class="jumbotron my-4 py-4">
             <p class="lead">使用說明</p>
             <hr>
-            <ul>
+            <ul class="mb-0">
                 <li>公定手續費費率：0.1425%</li>
                 <li>證券交易稅稅率：0.3%</li>
                 <li>現股當沖證券交易稅稅率減半</li>
@@ -100,6 +105,13 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
+                    <div class="form-group">
+                        <label for="模式">模式</label>
+                        <select class="form-control form-control-sm" id="模式">
+                            <option value="簡易" selected>簡易</option>
+                            <option value="詳細">詳細</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="手續費折扣">手續費折扣</label>
                         <input type="number" inputmode="decimal" class="form-control form-control-sm" autocomplete="off" step="0.05" min="0.1" max="1" id="手續費折扣">
