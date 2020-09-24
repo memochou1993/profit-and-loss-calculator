@@ -232,7 +232,7 @@ class 計算器 {
       ? 取得節點("表格").classList.add("table-responsive-md")
       : 取得節點("表格").classList.remove("table-responsive-md");
 
-    Array.from(取得相同類別節點("詳細欄位")).forEach(節點 => {
+    Array.from(取得相同類別節點("詳細欄位")).forEach((節點) => {
       this.詳細模式 ? 顯示(節點) : 隱藏(節點);
     });
   }
@@ -287,6 +287,8 @@ class 計算器 {
         const 報酬率 = 損益金額 / 成本;
         const 賣出價格背景顏色 = this.取得賣出價格背景顏色(偏移);
         const 損益金額顏色 = this.取得損益金額顏色(損益金額);
+        const 原始買入手續費字樣 = 原始買入手續費 < 最低手續費 ? `(${this.格式化(原始買入手續費)})` : "";
+        const 原始賣出手續費字樣 = 原始賣出手續費 < 最低手續費 ? `(${this.格式化(原始賣出手續費)})` : "";
 
         return `
           <tr class="text-center" style="background:${賣出價格背景顏色};">
@@ -300,10 +302,10 @@ class 計算器 {
               ${this.格式化(實收總金額)}
             </td>
             <td ${this.簡易模式 && "hidden"}>
-              ${this.格式化(買入手續費)} ${原始買入手續費 < 最低手續費 ? `(${this.格式化(原始買入手續費)})` : ""}
+              ${this.格式化(買入手續費)} ${原始買入手續費字樣}
             </td>
             <td ${this.簡易模式 && "hidden"}>
-              ${this.格式化(賣出手續費)} ${原始賣出手續費 < 最低手續費 ? `(${this.格式化(原始賣出手續費)})` : ""}
+              ${this.格式化(賣出手續費)} ${原始賣出手續費字樣}
             </td>
             <td ${this.簡易模式 && "hidden"}>
               ${this.格式化(證券交易稅)}
