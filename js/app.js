@@ -236,16 +236,7 @@ class 計算器 {
 
   換算檔位(價格) {
     if (this.交易類別 === "ETF") {
-      switch (true) {
-        case 價格 < 50:
-          return 0.01;
-        case 價格 >= 50:
-          return 0.05;
-        default:
-          break;
-      }
-
-      return;
+      return 價格 < 50 ? 0.01 : 0.05;
     }
 
     switch (true) {
