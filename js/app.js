@@ -11,6 +11,7 @@ const 虧損顏色 = "red";
 const 賣出價格背景顏色 = "gold";
 const 公定手續費費率 = 0.1425 / 百;
 const 證券交易稅稅率 = 0.3 / 百;
+const ETF證券交易稅稅率 = 0.1 / 百;
 const 預設模式 = "簡易";
 const 預設最低手續費 = 20;
 const 預設手續費折扣 = 1;
@@ -155,7 +156,14 @@ class 計算器 {
   }
 
   精算證券交易稅稅率(交易類別) {
-    return 證券交易稅稅率 * (交易類別 === "現股當沖" ? 0.5 : 1);
+    switch (true) {
+      case 交易類別 === "現股當沖":
+        return 證券交易稅稅率 * 0.5;
+      case 交易類別 === "ETF":
+        return ETF證券交易稅稅率;
+      default:
+        return 證券交易稅稅率;
+    }
   }
 
   取得欄位數值(欄位, 屬性 = 值) {
@@ -178,6 +186,11 @@ class 計算器 {
   }
 
   註冊事件() {
+    註冊事件(this.交易類別欄位, 輸入, () => {
+      this.修正間隔(this.買入價格欄位, this.換算檔位(this.買入價格));
+      this.修正間隔(this.賣出價格欄位, this.換算檔位(this.賣出價格));
+    });
+
     註冊事件(this.買入價格欄位, 輸入, () => {
       this.修正間隔(this.買入價格欄位, this.換算檔位(this.買入價格));
     });
@@ -222,21 +235,33 @@ class 計算器 {
   }
 
   換算檔位(價格) {
-    switch (true) {
-      case 價格 < 10:
-        return 0.01;
-      case 價格 >= 10 && 價格 < 50:
-        return 0.05;
-      case 價格 >= 50 && 價格 < 100:
-        return 0.1;
-      case 價格 >= 100 && 價格 < 500:
-        return 0.5;
-      case 價格 >= 500 && 價格 < 1000:
-        return 1;
-      case 價格 >= 1000:
-        return 5;
-      default:
-        break;
+    if (this.交易類別 === "ETF") {
+      switch (true) {
+        case 價格 < 50:
+          return 0.01;
+        case 價格 >= 50:
+          return 0.05;
+        default:
+          break;
+      }
+    }
+    else {
+      switch (true) {
+        case 價格 < 10:
+          return 0.01;
+        case 價格 >= 10 && 價格 < 50:
+          return 0.05;
+        case 價格 >= 50 && 價格 < 100:
+          return 0.1;
+        case 價格 >= 100 && 價格 < 500:
+          return 0.5;
+        case 價格 >= 500 && 價格 < 1000:
+          return 1;
+        case 價格 >= 1000:
+          return 5;
+        default:
+          break;
+      }
     }
   }
 
