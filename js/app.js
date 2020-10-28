@@ -11,7 +11,7 @@ const 虧損顏色 = "red";
 const 賣出價格背景顏色 = "gold";
 const 公定手續費費率 = 0.1425 / 百;
 const 證券交易稅稅率 = 0.3 / 百;
-const ETF證券交易稅稅率 = 0.1 / 百;
+const 指數股票型基金證券交易稅稅率 = 0.1 / 百;
 const 預設模式 = "簡易";
 const 預設最低手續費 = 20;
 const 預設手續費折扣 = 1;
@@ -160,7 +160,7 @@ class 計算器 {
       case 交易類別 === "現股當沖":
         return 證券交易稅稅率 * 0.5;
       case 交易類別 === "ETF":
-        return ETF證券交易稅稅率;
+        return 指數股票型基金證券交易稅稅率;
       default:
         return 證券交易稅稅率;
     }
@@ -262,10 +262,6 @@ class 計算器 {
   }
 
   處理顯示模式() {
-    this.詳細模式
-      ? 取得節點("表格").classList.add("table-responsive-md")
-      : 取得節點("表格").classList.remove("table-responsive-md");
-
     Array.from(取得相同類別節點("詳細欄位")).forEach((節點) => {
       this.詳細模式 ? 顯示(節點) : 隱藏(節點);
     });
