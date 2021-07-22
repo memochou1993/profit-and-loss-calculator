@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Memo Chou">
-    <meta name="description" content="要賣多少才好？">
+    <meta name="description" content="簡單易用的股票交易計算器">
     <meta property="og:type" content="website">
     <meta property="og:title" content="股票交易計算器">
-    <meta property="og:description" content="要賣多少才好？">
+    <meta property="og:description" content="簡單易用的股票交易計算器">
     <meta property="og:image" content="https://memochou1993.github.io/profit-and-loss-calculator/images/cover.png">
     <meta property="og:image:alt" content="股票交易計算器">
     <meta property="og:image:type" content="image/png">
@@ -23,10 +23,10 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <a class="navbar-brand" href="./">股票交易計算器</a>
-        <div class="ml-auto d-none d-sm-block">
-            <a href="https://github.com/memochou1993/profit-and-loss-calculator" rel="noopener noreferrer" target="_blank">
-                <img src="images/repository.png" width="28px">
-            </a>
+        <div class="ml-auto text-white">
+            <button class="btn btn-sm btn-outline-light" data-toggle="modal" data-target="#modal">
+                設定
+            </button>
         </div>
     </nav>
 
@@ -76,11 +76,6 @@
             </thead>
             <tbody id="報價"></tbody>
         </table>
-        <div class="d-block d-md-none py-1">
-            <button class="btn btn-sm btn-outline-dark btn-block" data-toggle="modal" data-target="#modal">
-                設定
-            </button>
-        </div>
         <div class="jumbotron my-4 py-4">
             <p class="lead">使用說明</p>
             <hr>
@@ -94,12 +89,10 @@
                 <li>手機版可加入主畫面離線使用</li>
             </ul>
         </div>
-        <div class="text-right" id="footer">
-            Powered by <a href="mailto:memochou1993@gmail.com">Memo Chou</a>
+        <div class="text-center" id="footer">
+            Powered by <a href="https://github.com/memochou1993/profit-and-loss-calculator" rel="noopener noreferrer" target="_blank">Memo Chou</a>
         </div>
     </div>
-
-    <img src="images/gear.png" data-toggle="modal" data-target="#modal" class="d-none d-md-block" id="gear">
 
     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
