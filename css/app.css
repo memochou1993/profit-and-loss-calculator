@@ -6,6 +6,10 @@ table {
   table-layout: fixed;
 }
 
+table>tbody>tr>td {
+  width: 200px;
+}
+
 .jumbotron {
   font-weight: 300;
 }
