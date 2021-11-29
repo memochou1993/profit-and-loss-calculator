@@ -4,7 +4,6 @@ self.addEventListener("install", (e) => {
       return cache.addAll([
         "/profit-and-loss-calculator/",
         "/profit-and-loss-calculator/index.html",
-        "/profit-and-loss-calculator/images/repository.png",
         "/profit-and-loss-calculator/css/bootstrap.min.css",
         "/profit-and-loss-calculator/css/app.css",
         "/profit-and-loss-calculator/js/jquery.min.js",
