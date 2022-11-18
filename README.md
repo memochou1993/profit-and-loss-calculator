@@ -1,8 +1,10 @@
 # 好用的股票交易計算器：適合零股交易和當沖
 
-## 網址
+## 立即使用
 
-https://memochou1993.github.io/profit-and-loss-calculator/
+網址：<https://stock.epoch.tw>
+
+![image demo](./demo.png)
 
 ## 使用說明
 
